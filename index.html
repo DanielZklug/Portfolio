@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">Code<span>Craft</span></a>
+            <div class="menu-btn">
+                <i class="bi bi-list"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#projects">Projets</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Témoignages</a></li>
+                <li><a href="#certifications">Certificats</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Accueil -->
+    <section id="home">
+        <div class="home-content fade-in">
+            <h1>Bonjour, je suis <span>CodeCraft</span></h1>
+            <h2>Je transforme les idées en applications fonctionnelles</h2>
+            <p>Étudiant en 2ᵉ année de Génie Logiciel passionné par le développement web et les algorithmes.</p>
+            <div>
+                <a href="#projects" class="btn">Voir mes projets</a>
+                <a href="https://forms.gle/2BWMtYEGJKp158xQ7" class="btn btn-outline">Me contacter</a>
+            </div>
+            <div class="social-icons">
+                <a href="#" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
+                <a href="https://github.com/DanielZklug" target="_blank"><i class="bi bi-github"></i></a>
+                <a href="https://www.youtube.com/@CodeCraft-h4o" target="_blank"><i class="bi bi-youtube"></i></a>
+            </div>
+        </div>
+        <div class="home-img fade-in">
+            <img src="assets/img/android-chrome-512x512.png" alt="Photo de CodeCraft">
+        </div>
+    </section>
+
+    <!-- À propos -->
+    <section id="about">
+        <h2 class="section-title">À propos de moi</h2>
+        <div class="about-content">
+            <div class="about-text fade-in">
+                <h3>Développeur Full Stack Junior</h3>
+                <p>Je m'appelle Abondo Daniel Judicael, alias CodeCraft. Je suis un étudiant camerounais en 2ᵉ année de Génie Logiciel, passionné par le développement web et les nouvelles technologies.</p>
+                <p>Mon parcours académique m'a permis d'acquérir des compétences solides en programmation et en conception logicielle. Je me spécialise actuellement dans le développement web full stack avec une préférence pour les technologies modernes.</p>
+                <p>En dehors du code, je m'intéresse particulièrement aux algorithmes et à l'intelligence artificielle. J'aime résoudre des problèmes complexes et créer des solutions innovantes.</p>
+                <!-- ... reste du contenu ... -->
+            </div>
+            <div id="skills-container" class="skills fade-in">
+            </div>
+        </div>
+    </section>
+    <!-- Badges et Certificats -->
+    <section id="certifications">
+        <h2 class="section-title">Badges & Certificats</h2>
+        <div class="certifications-grid">
+            <script>
+                // Données des badges et certificats
+                const certifications = [
+                    {
+                        type: "badge",
+                        title: "Python Essentials 1",
+                        issuer: "Cisco Networking Academy",
+                        date: "2024",
+                        image: "assets/img/badge1.png",
+                        link: "https://www.credly.com/badges/2faea801-d855-4bd1-aac6-d9b4b589975a",
+                        preview: "assets/img/badge1.png"
+                    },
+                    {
+                        type: "certificate",
+                        title: "Python Essentials 1",
+                        issuer: "Cisco Networking Academy",
+                        date: "2024",
+                        image: "assets/img/certif1.png",
+                        link: "assets/certificates/Python_Essentials_1_certificate.pdf"
+                    },
+                ];
+
+                certifications.forEach(item => {
+                    if(item.type === "badge") {
+                        document.writeln(`
+                        <div class="certification-card fade-in" onclick="showBadgePreview('${item.preview}', '${item.title}')">
+                            <div class="certification-img">
+                                <img src="${item.image}" alt="${item.title}">
+                                <div class="badge-corner"><i class="bi bi-link-45deg"></i></div>
+                            </div>
+                            <div class="certification-info">
+                                <h3>${item.title}</h3>
+                                <p><strong>Émetteur:</strong> ${item.issuer}</p>
+                                <p><strong>Date:</strong> ${item.date}</p>
+                                <a href="${item.link}" target="_blank" class="btn" onclick="event.stopPropagation()">Voir le badge</a>
+                            </div>
+                        </div>
+                        `);
+                    } else {
+                        document.writeln(`
+                        <div class="certification-card fade-in" onclick="showPdfModal('${item.link}', '${item.title}')">
+                            <div class="certification-img">
+                                <img src="${item.image}" alt="${item.title}">
+                                <div class="pdf-corner"><i class="bi bi-file-earmark-pdf"></i></div>
+                            </div>
+                            <div class="certification-info">
+                                <h3>${item.title}</h3>
+                                <p><strong>Émetteur:</strong> ${item.issuer}</p>
+                                <p><strong>Date:</strong> ${item.date}</p>
+                                <button class="btn" onclick="event.stopPropagation();showPdfModal('${item.link}', '${item.title}')">Voir le certificat</button>
+                            </div>
+                        </div>
+                        `);
+                    }
+                });
+            </script>
+        </div>
+    </section>
+
+    <!-- Modal pour les aperçus de badges -->
+    <div id="badgeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('badgeModal')">&times;</span>
+            <h3 id="badgeModalTitle"></h3>
+            <img id="badgeModalImage" src="" alt="Badge Preview" class="modal-preview-image">
+            <a id="badgeModalLink" href="#" target="_blank" class="btn">Voir le badge complet</a>
+        </div>
+    </div>
+
+    <!-- Modal pour les PDF -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('pdfModal')">&times;</span>
+            <h3 id="pdfModalTitle"></h3>
+            <iframe id="pdfModalFrame" src="" frameborder="0" class="pdf-viewer"></iframe>
+            <a id="pdfModalLink" href="#" target="_blank" class="btn">Télécharger le PDF</a>
+        </div>
+    </div>
+
+    <!-- Projets -->
+    <section id="projects">
+        <h2 class="section-title">Mes Projets</h2>
+        <div id="projects-grid" class="projects-grid">
+            <script>
+                const projects = [
+                    {
+                        title: "Système de Gestion de Ferme Avicole",
+                        description: "Application web complète développée avec React (frontend) et Laravel (backend) pour la gestion des élevages.",
+                        image: "assets/img/projet1.png",
+                        links: {
+                            code: "#home",
+                            demo: "https://www.youtube.com/watch?v=U7eoc2YE-0A"
+                        }
+                    },
+                    {
+                        title: "Traduction de l'application HospitalRun (Projet Open Source)",
+                        description: "Participation à la traduction complète de l'interface d'un système d'information hospitalier open source (anglais ↔ français) afin de le rendre accessible aux professionnels francophones.",
+                        image: "assets/img/projet2.png",
+                        links: {
+                            code: "#home",
+                            demo: "https://www.youtube.com/watch?v=ISWNqVcqYxI"
+                        }
+                    },
+                    {
+                        title: "Application de gestion de stagiaires",
+                        description: "Application web développée en HTML, CSS, JavaScript et PHP, avec un template Webflow personnalisé.",
+                        image: "assets/img/projet3.png",
+                        links: {
+                            code: "#home",
+                            demo: "https://www.youtube.com/watch?v=6h3_qdGt-1M"
+                        }
+                    },
+                    {
+                        title: "Traduction d'un Système de Gestion Hospitalière (HMS)",
+                        description: "Traduction complète en français d'une application open source développée en PHP, JavaScript et Bootstrap. Le projet vise à rendre l'outil accessible aux professionnels de santé francophones.",
+                        image: "assets/img/projet4.png",
+                        links: {
+                            code: "#home",
+                            demo: "https://www.youtube.com/watch?v=2n9bNz0Nvk8"
+                        }
+                    }
+                    // ... autres projets
+                ];
+
+                projects.forEach(project => {
+                    document.writeln( `
+                    <div class="project-card fade-in">
+                        <div class="project-img">
+                            <img src="${project.image}" alt="${project.title}">
+                        </div>
+                        <div class="project-info">
+                            <h3>${project.title}</h3>
+                            <p>${project.description}</p>
+                            <div class="project-links">
+                                <a href="${project.links.code}" target="_blank"><i class="bi bi-github"></i> Code</a>
+                                <a href="${project.links.demo}" target="_blank"><i class="bi bi-youtube"></i> Démo</a>
+                            </div>
+                        </div>
+                    </div>
+                    `);
+                });
+    
+            </script>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <h2 class="section-title">Mes Services</h2>
+        <div class="services-grid">
+            <script>
+                // Données des services
+                const services = [
+                    {
+                        title: "Développement Web",
+                        description: "Création de sites web modernes, responsives et performants adaptés à vos besoins.",
+                        icon: "bi bi-code-slash",
+                        link: "https://www.iworks.sn/gigs/conception-de-page-web"
+                    },
+                    {
+                        title: "Traduction Open Source",
+                        description: "Localisation d'applications open source pour les adapter au marché francophone.",
+                        icon: "bi bi-translate",
+                        link: "https://www.iworks.sn/gigs/traduction-de-l-application-hospitalrun-open-source"
+                    },
+                    {
+                        title: "Coaching Étudiants",
+                        description: "Accompagnement personnalisé pour les étudiants en programmation et algorithmique.",
+                        icon: "bi bi-person-video",
+                        link: "https://www.iworks.sn/gigs/coaching-accompagnement-de-projets-informatiques-pour-Etudiants-en-gl"
+                    },
+                    {
+                        title: "Solutions Full Stack",
+                        description: "Développement d'applications complètes avec frontend et backend intégrés.",
+                        icon: "bi bi-stack",
+                        link: "https://www.iworks.sn/gigs/conception-d-application-web"
+                    }
+                    // ... autres services
+                ];
+
+                services.forEach(service => {
+                    document.writeln(`
+                    <div class="service-card fade-in">
+                        <div class="service-icon">
+                            <i class="${service.icon}"></i>
+                        </div>
+                        <h3>${service.title}</h3>
+                        <p>${service.description}</p>
+                        <a href="${service.link}" class="btn" target="_blank">Voir plus</a>
+                    </div>
+                    `);
+                });
+            </script>
+        </div>
+    </section>
+
+    <!-- Témoignages -->
+    <section id="testimonials">
+        <h2 class="section-title">Témoignages</h2>
+        <div class="testimonials">
+            <script>
+                // Données des témoignages
+                const testimonials = [
+                    {
+                        a: {
+                            link: 'https://www.iworks.sn/gigs/conception-de-page-web#fifth',
+                            text: '"Le résultat est bon. Page élégante et responsive comme souhaité."'
+                        },
+                        img: 'assets/img/client.jpg',
+                        h4: 'Aminata B.',
+                        p: 'Employeur Iworks'
+                    }
+                    // Vous pouvez ajouter d'autres témoignages ici
+                ];
+                testimonials.forEach(testimonial => {
+                    document.writeln(`
+                        <div class="testimonial-card fade-in">
+                            <a href="${testimonial.a.link}" target="_blank" rel="noopener noreferrer" class="testimonial-text">
+                                ${testimonial.a.text}
+                            </a>
+                            <div class="testimonial-author">
+                                <div class="author-img">
+                                    <img src="${testimonial.img}" alt="Client">
+                                </div>
+                                <div class="author-info">
+                                    <h4>${testimonial.h4}</h4>
+                                    <p>${testimonial.p}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                })
+            </script>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>CodeCraft - Transformons vos idées en réalité numérique</p>
+            <p class="copyright">© <script>document.write(new Date().getFullYear());</script> CodeCraft. Tous droits réservés.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
